@@ -1,8 +1,22 @@
 import React, {Fragment, useContext, useEffect} from 'react';
 import {Store} from './Store';
+import './index.css';
+
+interface IEpisode {
+    airdate: string
+    airstamp: string
+    airtime: string
+    id: number
+    image: {medium: string, original: string}
+    name: string
+    number: number
+    runtime: number
+    season: number
+    summary: string
+    url: string
+}
 
 export default function App() : JSX.Element {
-    console.log('+++++ came inside App +++++++ ');
     const {state, dispatch} = useContext(Store);
     useEffect(() => {
         if (state.episodes.length === 0) {
@@ -23,12 +37,14 @@ export default function App() : JSX.Element {
     }
     return (
         <Fragment>
-            <h1>Rick and Morty</h1>
-            <p>Pick your favorite episode!!!</p>
-            <section>
-                {state.episodes.map((episode:any) => {
+            <header className="header">
+                <h1>Rick and Morty</h1>
+                <p>Pick your favorite episode!!!</p>
+            </header>
+            <section className="episode-layout">
+                {state.episodes.map((episode:IEpisode) => {
                     return (
-                        <section key={episode.id}>
+                        <section key={episode.id} className="episode-box">
                             <img src={episode.image.medium} alt={episode.name} />
                             <div>{episode.name}</div>
                             <section>
