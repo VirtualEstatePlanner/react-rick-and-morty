@@ -1,0 +1,13 @@
+{
+  "name": "react-rick-and-morty",
+  "version": "1.0.0",
+  "description": "Sample application to learn react context and suspense API",
+  "main": "index.js",
+  "repository": "https://github.com/abhsrivastava/react-rick-and-morty.git",
+  "author": "abhsrivastava",
+  "license": "MIT",
+  "scripts": {
+    "start": "webpack-dev-server --open",
+    "build": "webpack"
+  }
+}
