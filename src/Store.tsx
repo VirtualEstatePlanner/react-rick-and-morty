@@ -1,4 +1,4 @@
-import React, {useReducer} from 'react';
+import React, {createContext, useReducer} from 'react';
 interface IState {
     episodes: string[],
     favorites: string[]
@@ -13,7 +13,7 @@ const initialState : IState = {
     episodes: [],
     favorites: []
 };
-export const Store = React.createContext<IState | any>(initialState);
+export const Store = createContext<IState | any>(initialState);
 function reducer(state: IState, action: IAction): IState {
     console.log('++++ came inside reducer ++++');
     switch(action.type) {
@@ -25,5 +25,5 @@ function reducer(state: IState, action: IAction): IState {
 }
 export function StoreProvider(props: any): JSX.Element {
     const [state, dispatch] = useReducer(reducer, initialState);
-    return <Store.Provider value={{state, dispatch}}>{props.childen}</Store.Provider>
+    return <Store.Provider value={{state, dispatch}}>{props.children}</Store.Provider>
 }
