@@ -15,6 +15,7 @@ const initialState : IState = {
 };
 export const Store = React.createContext<IState | any>(initialState);
 function reducer(state: IState, action: IAction): IState {
+    console.log('++++ came inside reducer ++++');
     switch(action.type) {
         case 'FETCH_DATA':
             return {...state, episodes: action.payload};
