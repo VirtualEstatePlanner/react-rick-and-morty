@@ -5,14 +5,16 @@ export default function App() : JSX.Element {
     console.log('+++++ came inside App +++++++ ');
     const {state, dispatch} = useContext(Store);
     useEffect(() => {
-        console.log('came inside use effect')
-        state.episodes.length === 0 && fetchDataAction()
+        if (state.episodes.length === 0) {
+            console.log('making remote call')
+            fetchDataAction()
+        } else {
+            console.log('data is already present. not making remote call')
+        }
     });
 
     const fetchDataAction = async () => {
-        console.log('came inside fetch data');
-        const URL = 'https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes';
-        const data = await fetch(URL);
+        const data = await fetch('https://api.tvmaze.com/singlesearch/shows?q=rick-&-morty&embed=episodes');
         const dataJson = await data.json();
         return dispatch({
             type: 'FETCH_DATA',
@@ -23,11 +25,10 @@ export default function App() : JSX.Element {
         <Fragment>
             <h1>Rick and Morty</h1>
             <p>Pick your favorite episode!!!</p>
-            {console.log(state)}
-            {/* <section>
+            <section>
                 {state.episodes.map((episode:any) => {
                     return (
-                        <section id={episode.id}>
+                        <section key={episode.id}>
                             <img src={episode.image.medium} alt={episode.name} />
                             <div>{episode.name}</div>
                             <section>
@@ -36,7 +37,7 @@ export default function App() : JSX.Element {
                         </section>
                     );
                 })}
-            </section> */}
+            </section>
         </Fragment>
     )
 }
